@@ -50,7 +50,7 @@ namespace TicTacToe.UnitTests
             const char expected = 'X';
             for (var rowIndex = 0; rowIndex < 3; rowIndex++)
             {
-                _gameBoard[0, rowIndex] = expected;
+                _gameBoard[1, rowIndex] = expected;
             }
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
@@ -62,7 +62,7 @@ namespace TicTacToe.UnitTests
             const char expected = 'X';
             for (var rowIndex = 0; rowIndex < 3; rowIndex++)
             {
-                _gameBoard[0, rowIndex] = expected;
+                _gameBoard[2, rowIndex] = expected;
             }
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
@@ -86,7 +86,7 @@ namespace TicTacToe.UnitTests
             const char expected = 'X';
             for (var columnIndex = 0; columnIndex < 3; columnIndex++)
             {
-                _gameBoard[columnIndex, 0] = expected;
+                _gameBoard[columnIndex, 1] = expected;
             }
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
@@ -96,13 +96,15 @@ namespace TicTacToe.UnitTests
         public void PlayerWithAllSpacesInThirdColumnIsWinner()
         {
             const char expected = 'X';
-            for (var columnIndex = 0; columnIndex < 3; columnIndex++)
-            {
-                _gameBoard[columnIndex, 0] = expected;
-            }
+
+             for (var columnIndex = 0; columnIndex < 3; columnIndex++)
+             {
+                 _gameBoard[columnIndex, 2] = expected;
+             }
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
+
 
         [Test]
         public void PlayerWithThreeInARowDiagonallyDownAndToRightIsWinner()
@@ -120,10 +122,16 @@ namespace TicTacToe.UnitTests
         public void PlayerWithThreeInARowDiagonallyDownAndToLeftIsWinner()
         {
             const char expected = 'X';
+            _gameBoard[0, 2] = expected;
+            _gameBoard[1, 1] = expected;
+            _gameBoard[2, 0] = expected;
+
+            /*
             for (var cellIndex = 0; cellIndex < 3; cellIndex++)
             {
                 _gameBoard[cellIndex, cellIndex] = expected;
             }
+            */
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
